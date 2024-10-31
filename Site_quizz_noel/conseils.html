@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz</title>
+    <style>
+        html, body {
+            background: linear-gradient(150deg, #00344c, #005b4a);
+            text-align: center;
+            width: 100%;
+            height: 100vh; /* Remplir la hauteur de la fenêtre */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white; /* Couleur du texte pour le corps */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+        }
+        h1 {
+            font-size: 1.5em; /* Taille de police par défaut */
+            margin: 10px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+         button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+			font-weight: bold;
+            background-image: white;
+            color: black;
+            border: none; 
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+			width: 300px; /* Largeur fixe */
+        }
+        button:hover {
+            background-image: linear-gradient(150deg, #999999, #005b4a);
+            transform: scale(1.05); /* Légère augmentation à l'hover */
+        }
+       .logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+            border: none
+            box-shadow: 1 4px 15px rgba(10, 10, 0, 0.5); /* Ombre pour faire ressortir l'image */
+        }
+        .facebook_button {
+            background-image: url('facebook.svg'); /* Remplacez par votre URL d'image */
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: transparent; /* Masquer le texte par défaut */
+            text-shadow: none; /* Pas d'ombre sur le texte */
+        }
+        /* Styles réactifs */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em; /* Taille réduite sur les petits écrans */
+            }
+            button {
+                font-size: 1em; /* Taille réduite sur les petits écrans */
+                padding: 8px 16px; /* Ajustement du padding */
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 900px) {
+            h1 {
+                font-size: 1.8em; /* Taille intermédiaire pour les tablettes */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Quizz terminé &#x1F44F;</h1>
+    <br>
+    <h1>Merci de votre participation!</h1>
+    <button onclick="window.location.href='./index.html'">Recommencer le Quizz</button>
+    <br>
+    <h1>Pour plus de conseils:</h1>
+    <button onclick="window.open('https://play.google.com/store/apps/details?id=com.masecuriteapp&hl=fr&pli=1', '_blank')">Application Ma Sécurité</button>
+    <br>
+    <button onclick="window.open('https://cyber.gouv.fr/bonnes-pratiques-protegez-vous', '_blank')">Site de l'ANSSI</button>
+    <br>
+    <button onclick="window.open('https://www.cybermalveillance.gouv.fr/', '_blank')">Site Cybermalveillance</button>
+    <br>
+    <h1>Nous suivre:</h1>
+	<a href="https://www.facebook.com/GendarmeriedeMaineetLoire/?locale=fr_FR" target="_blank">
+        <img src="facebook.svg" alt="Facebook">
+    </a>
+	<a href="https://x.com/Gendarmerie_049?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank">
+        <img src="twitterx.svg" alt="Twitter">
+    </a>
+</header>
+
+</body>
+</html>

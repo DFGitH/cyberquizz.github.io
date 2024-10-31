@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz</title>
+    <style>
+        html, body {
+            margin: 0; /* Supprime les marges par défaut */
+            padding: 0; /* Supprime les paddings par défaut */
+            height: 100%; /* Assure que le body prend toute la hauteur de la fenêtre */
+            background-color: #00344c;
+            text-align: center;
+            color: #ffffff;
+        }
+        header {
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            align-items: center; /* Centre horizontalement le contenu */
+            min-height: 100vh; /* Assure que le header prend toute la hauteur */
+            justify-content: center; /* Centre verticalement le contenu */
+            background-image: url("./fond.jpg"); /* Image de fond pour le header */
+            background-size: cover; /* Ajustement de la taille de l'image */
+            background-position: center; /* Centrer l'image */
+            background-repeat: no-repeat; /* Ne pas répéter l'image */
+            padding: 20px; /* Ajout de padding pour éviter le défilement */
+            box-sizing: border-box; /* Inclut le padding dans les dimensions */
+        }
+        h1 {
+            color: #fdfdfd;
+            font-size: 2em; /* Taille de police par défaut */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+			font-weight: bold;
+            background-color: #005b4a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #004080;
+        }
+        /* Styles réactifs */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em; /* Taille réduite sur les petits écrans */
+            }
+            button {
+                font-size: 1em; /* Taille réduite sur les petits écrans */
+                padding: 8px 16px; /* Ajustement du padding */
+            }
+        }
+        @media (orientation: landscape) {/* Ajustements pour les écrans en mode paysage */
+            header {
+                background-size: contain; /* Ajustez si nécessaire */
+            }
+        @media (min-width: 601px) and (max-width: 900px) {
+            h1 {
+                font-size: 1.8em; /* Taille intermédiaire pour les tablettes */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <button onclick="startQuiz()">Continuer</button>
+</header>
+
+<script>
+    function startQuiz() {
+        window.location.href = "infos.html"; // Redirige vers la page du quiz
+    }
+</script>
+
+</body>
+</html>
