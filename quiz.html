@@ -14,16 +14,13 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 10px; /* Correction ici */
+            margin: 10px;
         }
         .content {
             text-align: center;
         }
         h2 {
             color: #0056a0;
-        }
-        .question {
-            margin-bottom: 20px;
         }
         .tile {
             background-color: #f1f1f1;
@@ -56,6 +53,11 @@
             color: #d9534f;
             text-align: center;
         }
+        #nextButton {
+            display: none; /* Cacher le bouton au début */
+            margin: 20px auto; /* Centrer le bouton */
+            text-align: center; /* S'assurer que le texte est centré */
+        }
     </style>
 </head>
 <body>
@@ -65,6 +67,7 @@
     <div id="answers"></div>
     <button id="validateButton">Valider</button>
     <div class="result" id="result"></div>
+    <button id="nextButton">Question suivante</button>
 </div>
 
 <script>
@@ -117,7 +120,7 @@
         {
             question: "Je veux effectuer des achats sur internet?",
             answers: ["Je me rends sur des sites de confiance en vérifiant l'adresse", "Je visite n'importe quel site ", "Je me méfie des offres trop alléchantes"],
-            correct: ["Je me rends sur des sites de confiance en vérifiant son adresse", "Je me méfie des offres trop alléchantes"]
+            correct: ["Je me rends sur des sites de confiance en vérifiant l'adresse", "Je me méfie des offres trop alléchantes"]
         },
         {
             question: "Sur les réseaux sociaux ?",
@@ -136,16 +139,20 @@
         }
     ];
 
-   let currentQuestionIndex = 0;
+    let currentQuestionIndex = 0;
     const selectedAnswers = new Set();
+    let score = 0;
 
     function showQuestion() {
         const questionElement = document.getElementById("question");
         const answersElement = document.getElementById("answers");
         const resultElement = document.getElementById("result");
+        const nextButton = document.getElementById("nextButton");
 
         resultElement.textContent = ""; // Réinitialiser le message de résultat
         selectedAnswers.clear(); // Réinitialiser les réponses sélectionnées
+        nextButton.style.display = "none"; // Cacher le bouton "Question suivante"
+
         const currentQuestion = questions[currentQuestionIndex];
 
         questionElement.textContent = currentQuestion.question;
@@ -168,12 +175,13 @@
         }
         const tiles = document.querySelectorAll('.tile');
         tiles.forEach(tile => {
-            tile.style.backgroundColor = selectedAnswers.has(tile.textContent) ? '#cce5ff' : ''; // Highlight selected
+            tile.style.backgroundColor = selectedAnswers.has(tile.textContent) ? '#cce5ff' : '';
         });
     }
 
     document.getElementById("validateButton").onclick = () => {
         const resultElement = document.getElementById("result");
+        const nextButton = document.getElementById("nextButton");
         const currentQuestion = questions[currentQuestionIndex];
 
         if (selectedAnswers.size > 0) {
@@ -184,21 +192,30 @@
             if (isCorrect && allCorrect) {
                 resultElement.textContent = "Bonne réponse !";
                 resultElement.style.color = "green"; // Change la couleur en vert
+                score++; // Incrémente le score
             } else {
-                resultElement.innerHTML = `Oups! La bonne réponse est :<br><br>${currentQuestion.correct.join(', ')}`;
+                resultElement.innerHTML = `Oups! La bonne réponse est :<br>${currentQuestion.correct.join(', ')}`;
                 resultElement.style.color = "red"; // Change la couleur en rouge
             }
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                setTimeout(showQuestion, 5000); // Attendre 6 secondes avant la prochaine question
-            } else {
-                setTimeout(() => {
-                    window.location.href = "conseils.html"; // Renvoi vers la page de conseils
-                }, 2000);
-            }
+
+            nextButton.style.display = "block"; // Afficher le bouton "Question suivante"
+            document.getElementById("validateButton").disabled = true; // Désactiver le bouton "Valider"
         } else {
             resultElement.innerHTML = "Veuillez sélectionner au moins une réponse &#128580;";
-			resultElement.style.color = "blue"; // Change la couleur en rouge
+            resultElement.style.color = "blue"; // Change la couleur en bleu
+        }
+    };
+
+    document.getElementById("nextButton").onclick = () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion();
+            document.getElementById("validateButton").disabled = false; // Réactiver le bouton "Valider"
+        } else {
+            // Redirection vers conseils.html avec le score
+            const totalQuestions = questions.length;
+            const percentage = (score / totalQuestions) * 100; // Calculez le pourcentage
+            window.location.href = `conseils.html?score=${percentage.toFixed(2)}`; // Redirigez avec le score
         }
     };
 

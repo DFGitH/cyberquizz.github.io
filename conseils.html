@@ -30,52 +30,35 @@
             margin: 10px 0;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
-         button {
+        button {
             padding: 10px 20px;
             font-size: 1.2em;
-			font-weight: bold;
-            background-image: white;
+            font-weight: bold;
+            background-color: white;
             color: black;
             border: none; 
             border-radius: 15px;
             cursor: pointer;
             margin: 5px;
             transition: background-color 0.3s, transform 0.3s;
-			width: 300px; /* Largeur fixe */
+            width: 300px; /* Largeur fixe */
         }
         button:hover {
-            background-image: linear-gradient(150deg, #999999, #005b4a);
+            background-color: #999999;
             transform: scale(1.05); /* Légère augmentation à l'hover */
         }
-       .logo {
+        .score {
+            font-size: 1.2em;
+            color : lightyellow;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            margin: 20px 0; /* Espacement autour du score */
+        }
+        .logo {
             max-width: 150px;
             margin-bottom: 10px;
-            border: none
+            border: none;
             box-shadow: 1 4px 15px rgba(10, 10, 0, 0.5); /* Ombre pour faire ressortir l'image */
-        }
-        .facebook_button {
-            background-image: url('facebook.svg'); /* Remplacez par votre URL d'image */
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: transparent; /* Masquer le texte par défaut */
-            text-shadow: none; /* Pas d'ombre sur le texte */
-        }
-        /* Styles réactifs */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.5em; /* Taille réduite sur les petits écrans */
-            }
-            button {
-                font-size: 1em; /* Taille réduite sur les petits écrans */
-                padding: 8px 16px; /* Ajustement du padding */
-            }
-        }
-
-        @media (min-width: 601px) and (max-width: 900px) {
-            h1 {
-                font-size: 1.8em; /* Taille intermédiaire pour les tablettes */
-            }
         }
     </style>
 </head>
@@ -85,6 +68,7 @@
     <h1>Quizz terminé &#x1F44F;</h1>
     <br>
     <h1>Merci de votre participation!</h1>
+    <div class="score" id="score"></div>
     <button onclick="window.location.href='./index.html'">Recommencer le Quizz</button>
     <br>
     <h1>Pour plus de conseils:</h1>
@@ -102,6 +86,27 @@
         <img src="twitterx.svg" alt="Twitter">
     </a>
 </header>
+
+<script>
+    // Fonction pour obtenir les paramètres d'URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Récupérer le score
+    const score = getQueryParam('score');
+    
+    // Afficher le score si disponible
+    const scoreElement = document.getElementById("score");
+    if (score) {
+        // Arrondir le score à l'entier le plus proche
+        const roundedScore = Math.round(score);
+        scoreElement.innerHTML = `Votre score: ${roundedScore}%`;
+    } else {
+        scoreElement.innerHTML = "Aucun score disponible.";
+    }
+</script>
 
 </body>
 </html>
